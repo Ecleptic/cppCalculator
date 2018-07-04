@@ -1,0 +1,21 @@
+{
+    "files.associations": {
+        "*.js": "javascriptreact",
+        "__locale": "cpp",
+        "iosfwd": "cpp",
+        "istream": "cpp",
+        "iostream": "cpp",
+        "ios": "cpp",
+        "__bit_reference": "cpp",
+        "__string": "cpp",
+        "memory": "cpp",
+        "string": "cpp",
+        "type_traits": "cpp",
+        "iterator": "cpp",
+        "__split_buffer": "cpp",
+        "deque": "cpp",
+        "initializer_list": "cpp",
+        "string_view": "cpp",
+        "stack": "cpp"
+    }
+}
