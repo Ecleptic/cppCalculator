@@ -2,33 +2,19 @@
  * Infix to postfix
  * only '+', '-', '*', and '/' operators
  */
-#include <iostream> // allows I/O, cin, cout, etc.
-#include <stack>    // can make stack... duh
-#include <string>   // can make variables to be strings
+#include <iostream>
+#include <stack>
+#include <string>
 #include <vector>
 
-
-// lets us just write 'string' instead of 'std::string'
 using namespace std;
 
-/**
- * Declare functions before main.
- */
-
-// add pound signs after operators
 vector<string> parseInput(string expression);
-
 vector<string> infixToPostfix(vector<string> vector);
-
 bool isNumber(string numberExpression);
-
 bool isOperator(string s);
-
 string calc(vector<string> postfix);
 
-/**
- * MAIN
- */
 int main() {
     string expresion;
     cout << "enter Infix expression \n";
@@ -51,16 +37,6 @@ string calc(vector<string> postfix) {
     stack<string> S;
 
     for (int x = 0; x != postfix.size(); x++) {
-
-        /**
-         *  if number, push into stack
-         *  if operator pop top 2 off stack
-         *      - 2nd pop (operator) 1st op
-         *      - push result onto stack
-         *  if end of operations,
-         *      - pop off of stack  = returned answer.
-         *
-         */
 
         if (isNumber(postfix[x])) {
             S.push(postfix[x]);
@@ -98,35 +74,14 @@ vector<string> infixToPostfix(vector<string> expression) {
 
     stack<string> S;
 
-    vector<string> output; // initialize the postfix
+    vector<string> output;
 
 
     for (int x = 0; x != expression.size(); x++) {
         if (isNumber(expression[x])) {
             output.push_back(expression[x]);
-
-//            output += expression[x];
         } else if (isOperator(expression[x])) {
-            /**
-                * If stack is empty:
-                *      - send new op to stack
-                * else:
-                *      - if new operator is '*' or '/':
-                *          - if top of stack is '+' or '-':
-                *              - push new op into stack
-                *          - if top of stack is '*' or '/'
-                *              - pop off top
-                *              - push new op onto stack
-                *              -- check again.
-                *      - if new operator is '+' or '-':
-                *
-                *          - if top of stack is '+' or '-':
-                *              - pop off top
-                *              - push new op onto stack
-                *      - if end, pop all operators off
-                */
-
-            bool checkAgain = true;
+           bool checkAgain = true;
             while (checkAgain) {
 
                 if (S.empty()) {
@@ -142,16 +97,12 @@ vector<string> infixToPostfix(vector<string> expression) {
 
                         } else if (top == "*" || top == "/") {
                             output.push_back(top);
-
-//                            output += top;
                             S.pop();
                             S.push(op);
                             checkAgain = false;
                         }
-
                     } else if (op == "+" || op == "-") {
                         output.push_back(top);
-//                        output += top;
                         S.pop();
                     } else {
                         cout << "I made an error somewhere\n";
@@ -165,7 +116,6 @@ vector<string> infixToPostfix(vector<string> expression) {
         if (x == expression.size() - 1) {
             while (!S.empty()) {
                 output.push_back(S.top());
-//                output += S.top();
                 S.pop();
             }
         }
@@ -175,7 +125,6 @@ vector<string> infixToPostfix(vector<string> expression) {
 
 bool isNumber(string numberExpression) {
     bool isANumber = false;
-
 
     for (char i : numberExpression) {
         if (isdigit(i))
@@ -189,14 +138,8 @@ bool isOperator(string input) {
     return input == "+" || input == "-" || input == "*" || input == "/";
 }
 
-
-/*
- *  if current char == number and lookahead is number, push current char to tempstring
- *  if current char == operator: push tempstring, then push current char into inputVector, then wipe tempstring
- */
 vector<string> parseInput(string expression) {
     vector<string> inputVector;
-
     string tempString = "";
 
     for (int i = 0; i < expression.length(); ++i) {
@@ -208,15 +151,13 @@ vector<string> parseInput(string expression) {
             tempString = "";
 
         } else if (currentChar == ' ' || currentChar == ',') {
-//            do nothing
+            // do nothing
         } else {
             tempString += currentChar;
         }
         if (i == expression.length() - 1) {
             inputVector.push_back(tempString);
-
         }
-
     }
     return inputVector;
 }

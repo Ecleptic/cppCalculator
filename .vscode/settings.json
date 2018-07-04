@@ -16,6 +16,7 @@
         "deque": "cpp",
         "initializer_list": "cpp",
         "string_view": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "vector": "cpp"
     }
 }
